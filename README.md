@@ -35,3 +35,14 @@
 27. Documentation & Reporting
 28. Attacking Enterprise Networks
 
+##🔑 Main stages:
+Pre-Engagement → define scope, rules, contract
+Information Gathering → collect target data
+Vulnerability Assessment → identify weaknesses
+Exploitation → gain access
+Post-Exploitation → escalate privileges & collect data
+Lateral Movement → move across the network
+Proof of Concept → document how attacks worked
+Post-Engagement → report + clean up
+<img width="2079" height="783" alt="image" src="https://github.com/user-attachments/assets/e5c9a62b-5186-4da0-a260-d2e660e8bccd" />
+
