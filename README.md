@@ -64,7 +64,7 @@ answer: 2323
 - cd flag
 - get flag.txt
 - cat flag.txt
-- 
+  
 asnwer:dceece590f3284c3866305eb2473d099
 
 
