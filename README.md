@@ -1,4 +1,4 @@
-# Hack_The_box_Pen_Tester
+# Hack The box Pen Tester
 ## Penetration Tester Path Syllabus
 ### Introduction
 1. Penetration Testing Process
