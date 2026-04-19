@@ -186,3 +186,6 @@ cat 20260402045240_default_154.57.164.68_simplebackup.tra_445157.txt
 ```
 
 > ✅ Flag: `HTB{my_f1r57_h4ck}`
+
+## Privilege Escalation
+
