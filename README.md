@@ -311,3 +311,5 @@ cat flag.txt
 | `base64 shell -w 0` | Convert a file to base64 |
 | `echo f0VMR...SNIO...InmDwU \| base64 -d > shell` | Convert a file from base64 back to its original format |
 | `md5sum shell` | Check the file's md5sum to ensure it converted correctly |
+
+[⬇️ Download Getting Started  - cheatsheet.pdf](./Getting%20Started%20-%20cheatsheet.pdf)
